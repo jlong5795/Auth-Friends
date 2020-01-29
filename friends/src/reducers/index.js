@@ -4,7 +4,10 @@ import {
     USER_LOGIN_FAILURE,
     RETRIEVE_FRIENDS_START,
     RETRIEVE_FRIENDS_SUCCESS,
-    RETRIEVE_FRIENDS_FAILURE
+    RETRIEVE_FRIENDS_FAILURE,
+    CREATE_FRIEND_START,
+    CREATE_FRIEND_SUCCESS,
+    CREATE_FRIEND_FAILURE
 } from '../actions';
 
 
@@ -48,6 +51,23 @@ export const reducer = (state = initialState, action) => {
                 isLoading: false
             }
         case RETRIEVE_FRIENDS_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case CREATE_FRIEND_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case CREATE_FRIEND_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                friends: action.payload
+            }
+        case CREATE_FRIEND_FAILURE:
             return {
                 ...state,
                 isLoading: false,

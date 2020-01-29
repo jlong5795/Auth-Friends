@@ -34,7 +34,7 @@ export const getFriends = () => {
     return dispatch => {
         dispatch({ type: RETRIEVE_FRIENDS_START })
         axiosWithAuth()
-        .get('api/friends')
+        .get('/api/friends')
         .then(response => {
             dispatch({ type: RETRIEVE_FRIENDS_SUCCESS, payload: response.data})
             console.log(response.data);
@@ -47,3 +47,20 @@ export const getFriends = () => {
     }
     
 };
+
+export const createFriend = data => {
+    return dispatch => {
+        dispatch({ type: CREATE_FRIEND_START})
+        axiosWithAuth()
+            .post('/api/friends', {name: data.name, age: Number(data.age), email: data.email})
+            .then(response => {
+                dispatch({ type: CREATE_FRIEND_SUCCESS, payload: response.data})
+                console.log('Create new friend', response);
+                
+            })
+            .catch(error => {
+                dispatch({ type: CREATE_FRIEND_FAILURE, payload: error.data})
+                console.log(error);
+            })
+    }
+}

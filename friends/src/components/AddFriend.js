@@ -2,15 +2,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-
+import { createFriend } from '../actions';
 
 const AddFriend = props => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
         console.log(data);
-        //Push
-        props.history.push('/friends');
+        props.createFriend(data);
     };
 
     return (
@@ -49,4 +48,4 @@ const mapStateToProps = state => {
     return state;
 }
 
-export default connect(mapStateToProps, {})(AddFriend);
+export default connect(mapStateToProps, {createFriend})(AddFriend);
